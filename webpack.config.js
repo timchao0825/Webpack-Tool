@@ -1,14 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-
+// html
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+// css
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const SassPlugin = require('sass-webpack-plugin');
-// var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-
+// js
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-
+// others
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -18,59 +17,30 @@ const public = {
     partake: 'dist/'
 };
 module.exports = {
-    mode:'none',
     entry: './src/js/app.js',
     output:{
-        path: path.resolve(__dirname, './dist'),
-        // filename: '[name].js',
-        publicPath: public.partake,
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js',
     },
-    // resolve:{
-    //     modules: [
-    //         path.resolve('src'),
-    //         path.resolve('src/js'),
-    //         path.resolve('src/sass'),
-    //         path.resolve('src/images'),
-    //     ],
-    //     extensions: ['.js'] //加上JS附檔名
-    // },/* end resolve */
+    //指定開發資料夾
+    resolve: {
+        modules: [
+            path.resolve('src'),
+            path.resolve('src/js'),
+            path.resolve('src/sass'),
+            path.resolve('src/images'),
+            path.resolve('src/assets'),
+            path.resolve('node_modules')
+        ],
+        extensions: ['.js'] //加上JS附檔名
+    },
     module:{
         rules:[
-            {
-                test:/\.html$/,
-                use: [
-                    {
-                        loader:'file-loader',
-                        options:{
-                            name:'[name].[ext]'
-                        }
-                    }
-                ],
-                exclude: path.resolve('./node_modules'),
-            },/* end file loader */
-            {
-                test: /\.(sass|scss|css)$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'sass-loader',
-                ],
-                exclude: path.resolve('./node_modules'),
-            },/* end sass loader */
-            {
-                test: /\.(js)$/,
-                use:'babel-loader',
-                include: path.resolve('.'),
-                exclude: path.resolve('./node_modules'),
-            },/* end js loader */
+
         ]
     },/* end module */
     plugins:[
-        new CleanWebpackPlugin(), /* clean dist file */
         new HtmlWebpackPlugin(), /* init new hash assets file */
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css',
-        }),
+        new CleanWebpackPlugin(), /* clean dist file */
     ],/* end plugins */
 };/* end setting */

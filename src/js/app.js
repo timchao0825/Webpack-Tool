@@ -1,3 +1,3 @@
 
 import '../js/vendor/fastclick'
-console.log('here is main js');
+console.log('here is app js');
