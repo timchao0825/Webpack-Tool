@@ -36,6 +36,7 @@ module.exports = {
     devtool:"cheap-module-source-map",
     entry: {
         index: path.resolve(__dirname, 'src/js/index.js'),
+        about: path.resolve(__dirname, 'src/js/about.js'),
     },
     output:{
         filename:"js/[name].bundle.[hash].js",
@@ -72,7 +73,13 @@ module.exports = {
         new CleanWebpackPlugin(), /* clean dist file */
         new HtmlWebpackPlugin({
             filename: 'index.html',
+            chunks: ['index', 'commons'],
             template: path.resolve(__dirname, 'src/page/index.html'),
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'about.html',
+            chunks: ['about', 'commons'],
+            template: path.resolve(__dirname, 'src/page/about.html'),
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
