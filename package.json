@@ -36,7 +36,7 @@
     "@babel/preset-env": "^7.6.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "glob": "^7.1.5",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2"
